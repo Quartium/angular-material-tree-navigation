@@ -1,0 +1,44 @@
+<div class="main-container">
+  <div class="side-menu-container" [ngClass]="{ compressed: menuCompressed }">
+    <div class="header">
+      <button mat-icon-button class="compress-button" (click)="compressMenu()">
+        <mat-icon>
+          {{ menuCompressed ? 'chevron_right' : 'chevron_left' }}
+        </mat-icon>
+      </button>
+      <div class="logo"></div>
+    </div>
+    <mat-tree
+      [dataSource]="dataSource"
+      [treeControl]="treeControl"
+      class="example-tree"
+    >
+      <!-- This is the tree node template for leaf nodes -->
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+        <mat-icon>{{ node.icon }}</mat-icon>
+        <span>{{ node.name }}</span>
+      </mat-tree-node>
+      <!-- This is the tree node template for expandable nodes -->
+      <mat-nested-tree-node
+        *matTreeNodeDef="let node; when: hasChild"
+        (click)="handleNodeClick(node)"
+        [class.selected]="treeControl.isExpanded(node)"
+      >
+        <div class="mat-tree-node">
+          <mat-icon>{{ node.icon }}</mat-icon>
+          <span>{{ node.name }}</span>
+          <mat-icon>
+            {{ treeControl.isExpanded(node) ? 'remove' : 'add' }}
+          </mat-icon>
+        </div>
+        <div
+          [class.example-tree-invisible]="!treeControl.isExpanded(node)"
+          role="group"
+        >
+          <ng-container matTreeNodeOutlet></ng-container>
+        </div>
+      </mat-nested-tree-node>
+    </mat-tree>
+  </div>
+  <div class="content-container"></div>
+</div>
