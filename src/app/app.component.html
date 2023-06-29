@@ -1,12 +1,12 @@
 <div class="main-container">
   <div class="side-menu-container" [ngClass]="{ compressed: menuCompressed }">
     <div class="header">
-      <button mat-icon-button class="compress-button" (click)="compressMenu()">
-        <mat-icon>
-          {{ menuCompressed ? 'chevron_right' : 'chevron_left' }}
-        </mat-icon>
-      </button>
       <div class="logo"></div>
+      <button mat-icon-button class="compress-button" (click)="compressMenu()">
+      <mat-icon>
+        {{ menuCompressed ? 'chevron_right' : 'chevron_left' }}
+      </mat-icon>
+    </button>
     </div>
     <mat-tree
       [dataSource]="dataSource"
